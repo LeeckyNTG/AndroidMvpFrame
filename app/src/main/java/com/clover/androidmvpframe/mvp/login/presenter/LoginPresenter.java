@@ -1,22 +1,22 @@
-package com.clover.androidmvpframe.presenter.login;
+package com.clover.androidmvpframe.mvp.login.presenter;
 
 
-import com.clover.androidmvpframe.Base.BasePresenter;
-import com.clover.androidmvpframe.model.login.ILoginModel;
-import com.clover.androidmvpframe.model.login.LoginModelImpl;
 import com.clover.androidmvpframe.bean.User;
-import com.clover.androidmvpframe.view.login.ILoginView;
+import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
+import com.clover.androidmvpframe.mvp.login.model.ILoginModel;
+import com.clover.androidmvpframe.mvp.login.model.LoginModelImpl;
 
-public class LoginPresenter extends BasePresenter<ILoginView, LoginModelImpl> {
+
+public class LoginPresenter extends LoginContract.Presenter {
 
 
-    public LoginPresenter(ILoginView loginView) {
+    public LoginPresenter(LoginContract.View loginView) {
         mModel = new LoginModelImpl();
         mView = loginView;
     }
 
+    @Override
     public void login(final User user) {
-
 
         boolean isUsername = checkUsername(user);
         boolean isPassword = checkPassword(user);
@@ -46,7 +46,8 @@ public class LoginPresenter extends BasePresenter<ILoginView, LoginModelImpl> {
         });
     }
 
-    private boolean checkPassword(User user) {
+    @Override
+    public boolean checkPassword(User user) {
         if (user.getPassword().length() >= 5) {
             return true;
         } else {
@@ -54,7 +55,8 @@ public class LoginPresenter extends BasePresenter<ILoginView, LoginModelImpl> {
         }
     }
 
-    private boolean checkUsername(User user) {
+    @Override
+    public boolean checkUsername(User user) {
         if (user.getUsername().length() >= 5) {
             return true;
         } else {
@@ -65,5 +67,6 @@ public class LoginPresenter extends BasePresenter<ILoginView, LoginModelImpl> {
 
     @Override
     public void onAttached() {
+
     }
 }

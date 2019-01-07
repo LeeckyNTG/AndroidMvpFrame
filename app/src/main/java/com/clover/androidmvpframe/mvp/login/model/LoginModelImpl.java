@@ -1,4 +1,4 @@
-package com.clover.androidmvpframe.model.login;
+package com.clover.androidmvpframe.mvp.login.model;
 
 
 import com.clover.androidmvpframe.bean.User;

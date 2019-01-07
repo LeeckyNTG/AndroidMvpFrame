@@ -1,4 +1,4 @@
-package com.clover.androidmvpframe.ui.activity;
+package com.clover.androidmvpframe.mvp.login.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,11 +12,11 @@ import android.widget.TextView;
 import com.clover.androidmvpframe.Base.BaseActivity;
 import com.clover.androidmvpframe.R;
 import com.clover.androidmvpframe.bean.User;
-import com.clover.androidmvpframe.presenter.login.LoginPresenter;
-import com.clover.androidmvpframe.view.login.ILoginView;
+import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
+import com.clover.androidmvpframe.mvp.login.presenter.LoginPresenter;
 
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
+public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
 
 
     private AutoCompleteTextView username;
