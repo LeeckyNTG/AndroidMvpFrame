@@ -5,13 +5,12 @@ import com.clover.androidmvpframe.bean.User;
 
 public interface ILoginModel {
 
-    public void login(User user, LoginOnLoadListener listener);
+    public void login(LoginOnLoadListener listener);
 
 
     interface LoginOnLoadListener {
 
-        public void onSuccess();
+        public void onComplete(User user);
 
-        public void onError();
     }
 }

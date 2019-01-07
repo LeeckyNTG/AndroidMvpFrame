@@ -13,8 +13,10 @@ public interface ILoginView {
 
     public void stopLoading();
 
-    public void success();
+    public void complete(boolean bol);
 
-    public void error();
+    public void checkUsername(boolean bol);
+
+    public void checkPassword(boolean bol);
 
 }

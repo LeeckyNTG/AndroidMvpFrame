@@ -5,4 +5,7 @@
     <string name="prompt_email">用户名</string>
     <string name="prompt_password">密码</string>
     <string name="action_sign_in">登录</string>
+
+    <string name="icons">&#xe687;</string>
+
 </resources>

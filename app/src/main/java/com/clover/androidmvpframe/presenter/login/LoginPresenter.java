@@ -17,22 +17,51 @@ public class LoginPresenter extends BasePresenter<ILoginView, LoginModelImpl> {
 
     public void login(final User user) {
 
+
+        boolean isUsername = checkUsername(user);
+        boolean isPassword = checkPassword(user);
+
+        if (!isUsername) {
+            mView.checkUsername(false);
+            return;
+        }
+        if (!isPassword) {
+            mView.checkPassword(false);
+            return;
+        }
+
         mView.showLoading();
 
-        mModel.login(user, new ILoginModel.LoginOnLoadListener() {
-            @Override
-            public void onSuccess() {
-                mView.stopLoading();
-                mView.success();
-            }
+        mModel.login(new ILoginModel.LoginOnLoadListener() {
 
             @Override
-            public void onError() {
+            public void onComplete(User user1) {
                 mView.stopLoading();
-                mView.error();
+                if (user.getUsername().equals(user1.getUsername()) && user.getPassword().equals(user1.getPassword())) {
+                    mView.complete(true);
+                } else {
+                    mView.complete(false);
+                }
             }
         });
     }
+
+    private boolean checkPassword(User user) {
+        if (user.getPassword().length() >= 5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkUsername(User user) {
+        if (user.getUsername().length() >= 5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public void onAttached() {

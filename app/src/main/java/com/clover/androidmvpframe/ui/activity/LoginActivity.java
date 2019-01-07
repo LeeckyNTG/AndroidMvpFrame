@@ -1,11 +1,13 @@
 package com.clover.androidmvpframe.ui.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.clover.androidmvpframe.Base.BaseActivity;
 import com.clover.androidmvpframe.R;
@@ -17,13 +19,13 @@ import com.clover.androidmvpframe.view.login.ILoginView;
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 
 
-
     private AutoCompleteTextView username;
 
     private EditText password;
 
     private Button login;
 
+    private TextView icon;
 
 
     @Override
@@ -31,9 +33,15 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mPresenter = new LoginPresenter(this);
 
         initView();
+
+        Typeface iconfont = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
+        icon.setTypeface(iconfont);
+
+        mPresenter = new LoginPresenter(this);
+
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +62,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
+        icon = findViewById(R.id.icon);
 
     }
 
@@ -68,13 +77,25 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     }
 
     @Override
-    public void success() {
-        Log.e("login", "showLoading: 登录成功...");
+    public void complete(boolean bol) {
+        if (bol) {
+            Log.e("login", "showLoading: 登录成功...");
+        } else {
+            Log.e("login", "showLoading: 登录失败...");
+        }
+    }
+
+
+    @Override
+    public void checkUsername(boolean bol) {
+        if (!bol)
+            Log.e("login", "showLoading: 用户名不符合规范...");
     }
 
     @Override
-    public void error() {
-        Log.e("login", "showLoading: 登录失败...");
+    public void checkPassword(boolean bol) {
+        if (!bol)
+            Log.e("login", "showLoading: 密码不符合规范...");
     }
 
 }

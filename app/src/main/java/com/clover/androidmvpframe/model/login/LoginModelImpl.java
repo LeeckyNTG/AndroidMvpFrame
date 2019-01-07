@@ -6,13 +6,18 @@ import com.clover.androidmvpframe.bean.User;
 public class LoginModelImpl implements ILoginModel {
 
     @Override
-    public void login(User user, LoginOnLoadListener listener) {
+    public void login(LoginOnLoadListener listener) {
 
-        if (user.getUsername().equals("admin") && user.getPassword().equals("123456")) {
-            listener.onSuccess();
-        } else {
-            listener.onError();
-        }
+        User user = getUser();
 
+        listener.onComplete(user);
+
+    }
+
+    private User getUser() {
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("123456");
+        return user;
     }
 }
