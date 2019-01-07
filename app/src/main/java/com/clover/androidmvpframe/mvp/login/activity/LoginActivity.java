@@ -1,7 +1,6 @@
 package com.clover.androidmvpframe.mvp.login.activity;
 
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -16,7 +15,7 @@ import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
 import com.clover.androidmvpframe.mvp.login.presenter.LoginPresenter;
 
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
+public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
 
     private AutoCompleteTextView username;
@@ -29,19 +28,25 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public int getLayoutId() {
+        return R.layout.activity_login;
+    }
 
+    @Override
+    public LoginPresenter createPresenter() {
+        return new LoginPresenter(this);
+    }
 
+    @Override
+    public LoginContract.View createView() {
+        return this;
+    }
+
+    @Override
+    public void init() {
         initView();
-
         Typeface iconfont = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
         icon.setTypeface(iconfont);
-
-        mPresenter = new LoginPresenter(this);
-
-
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +58,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 mPresenter.login(user);
             }
         });
-
-
     }
 
     private void initView() {

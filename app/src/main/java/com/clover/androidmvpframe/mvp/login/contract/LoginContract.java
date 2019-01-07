@@ -1,6 +1,7 @@
 package com.clover.androidmvpframe.mvp.login.contract;
 
 import com.clover.androidmvpframe.Base.BasePresenter;
+import com.clover.androidmvpframe.Base.IBaseView;
 import com.clover.androidmvpframe.bean.User;
 import com.clover.androidmvpframe.mvp.login.model.LoginModelImpl;
 
@@ -12,22 +13,22 @@ public interface LoginContract {
      * @author: clover
      * @time: 19-1-3 下午3:32
      */
-    public interface View {
+    interface View extends IBaseView {
 
         //加载进度条
-        public void showLoading();
+        void showLoading();
 
-        public void stopLoading();
+        void stopLoading();
 
-        public void complete(boolean bol);
+        void complete(boolean bol);
 
-        public void checkUsername(boolean bol);
+        void checkUsername(boolean bol);
 
-        public void checkPassword(boolean bol);
+        void checkPassword(boolean bol);
 
     }
 
-    public abstract class Presenter extends BasePresenter<View, LoginModelImpl> {
+    abstract class Presenter extends BasePresenter<View, LoginModelImpl> {
 
         public abstract void login(User user);
 
