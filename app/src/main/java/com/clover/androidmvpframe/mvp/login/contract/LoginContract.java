@@ -2,7 +2,7 @@ package com.clover.androidmvpframe.mvp.login.contract;
 
 import com.clover.androidmvpframe.Base.BasePresenter;
 import com.clover.androidmvpframe.Base.IBaseView;
-import com.clover.androidmvpframe.bean.User;
+import com.clover.androidmvpframe.greendao.bean.User;
 import com.clover.androidmvpframe.mvp.login.model.LoginModelImpl;
 
 public interface LoginContract {
@@ -32,9 +32,6 @@ public interface LoginContract {
 
         public abstract void login(User user);
 
-        public abstract boolean checkPassword(User user);
-
-        public abstract boolean checkUsername(User user);
     }
 
 }

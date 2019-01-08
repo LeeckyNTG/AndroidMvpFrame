@@ -12,7 +12,7 @@ import android.widget.ScrollView;
 import com.clover.androidmvpframe.Base.BaseActivity;
 import com.clover.androidmvpframe.Base.BaseApplication;
 import com.clover.androidmvpframe.R;
-import com.clover.androidmvpframe.bean.User;
+import com.clover.androidmvpframe.greendao.bean.User;
 import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
 import com.clover.androidmvpframe.mvp.login.presenter.LoginPresenter;
 import com.clover.androidmvpframe.widget.IconView;

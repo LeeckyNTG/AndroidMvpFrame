@@ -1,7 +1,7 @@
 package com.clover.androidmvpframe.mvp.login.presenter;
 
 
-import com.clover.androidmvpframe.bean.User;
+import com.clover.androidmvpframe.greendao.bean.User;
 import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
 import com.clover.androidmvpframe.mvp.login.model.ILoginModel;
 import com.clover.androidmvpframe.mvp.login.model.LoginModelImpl;
@@ -56,8 +56,7 @@ public class LoginPresenter extends LoginContract.Presenter {
         });
     }
 
-    @Override
-    public boolean checkPassword(User user) {
+    private boolean checkPassword(User user) {
         if (user.getPassword().length() >= 5) {
             return true;
         } else {
@@ -65,8 +64,7 @@ public class LoginPresenter extends LoginContract.Presenter {
         }
     }
 
-    @Override
-    public boolean checkUsername(User user) {
+    private boolean checkUsername(User user) {
         if (user.getUsername().length() >= 5) {
             return true;
         } else {

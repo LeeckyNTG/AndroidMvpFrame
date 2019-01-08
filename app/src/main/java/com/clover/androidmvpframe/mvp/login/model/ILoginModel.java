@@ -1,7 +1,7 @@
 package com.clover.androidmvpframe.mvp.login.model;
 
 
-import com.clover.androidmvpframe.bean.User;
+import com.clover.androidmvpframe.greendao.bean.User;
 
 import java.util.List;
 

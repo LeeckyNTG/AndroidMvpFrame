@@ -1,4 +1,4 @@
-package com.clover.androidmvpframe.bean;
+package com.clover.androidmvpframe.greendao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
