@@ -7,8 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'  //添加这一行
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 

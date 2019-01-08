@@ -54,7 +54,7 @@
                 android:textStyle="bold" />
 
 
-            <TextView
+            <com.clover.androidmvpframe.widget.IconView
                 android:id="@+id/icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

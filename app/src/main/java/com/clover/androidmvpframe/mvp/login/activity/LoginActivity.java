@@ -1,31 +1,45 @@
 package com.clover.androidmvpframe.mvp.login.activity;
 
-import android.graphics.Typeface;
 import android.util.Log;
-import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.clover.androidmvpframe.Base.BaseActivity;
 import com.clover.androidmvpframe.R;
 import com.clover.androidmvpframe.bean.User;
 import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
 import com.clover.androidmvpframe.mvp.login.presenter.LoginPresenter;
+import com.clover.androidmvpframe.widget.IconView;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
 
-    private AutoCompleteTextView username;
+    @BindView(R.id.username)
+    AutoCompleteTextView username;
+    @BindView(R.id.password)
+    EditText password;
+    @BindView(R.id.login)
+    Button login;
+    @BindView(R.id.icon)
+    IconView icon;
+    @BindView(R.id.email_login_form)
+    LinearLayout emailLoginForm;
+    @BindView(R.id.login_form)
+    ScrollView loginForm;
 
-    private EditText password;
-
-    private Button login;
-
-    private TextView icon;
-
+    @OnClick(R.id.login)
+    public void onViewClicked() {
+        User user = new User();
+        user.setUsername(username.getText().toString().trim());
+        user.setPassword(password.getText().toString().trim());
+        mPresenter.login(user);
+    }
 
     @Override
     public int getLayoutId() {
@@ -44,29 +58,6 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresent
 
     @Override
     public void init() {
-        initView();
-        Typeface iconfont = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
-        icon.setTypeface(iconfont);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                User user = new User();
-                user.setUsername(username.getText().toString().trim());
-                user.setPassword(password.getText().toString().trim());
-                mPresenter.login(user);
-            }
-        });
-    }
-
-    private void initView() {
-
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        login = findViewById(R.id.login);
-        icon = findViewById(R.id.icon);
-
     }
 
     @Override
@@ -88,7 +79,6 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresent
         }
     }
 
-
     @Override
     public void checkUsername(boolean bol) {
         if (!bol)
@@ -100,6 +90,5 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresent
         if (!bol)
             Log.e("login", "showLoading: 密码不符合规范...");
     }
-
 }
 
