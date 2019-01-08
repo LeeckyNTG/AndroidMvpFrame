@@ -3,6 +3,8 @@ package com.clover.androidmvpframe.mvp.login.model;
 
 import com.clover.androidmvpframe.bean.User;
 
+import java.util.List;
+
 public interface ILoginModel {
 
     void login(LoginOnLoadListener listener);
@@ -10,7 +12,7 @@ public interface ILoginModel {
 
     interface LoginOnLoadListener {
 
-        void onComplete(User user);
+        void onComplete(List<User> users);
 
     }
 }

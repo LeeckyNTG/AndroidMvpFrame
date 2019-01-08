@@ -1,23 +1,24 @@
 package com.clover.androidmvpframe.mvp.login.model;
 
 
+import com.clover.androidmvpframe.Base.BaseApplication;
 import com.clover.androidmvpframe.bean.User;
+
+import java.util.List;
 
 public class LoginModelImpl implements ILoginModel {
 
     @Override
     public void login(LoginOnLoadListener listener) {
 
-        User user = getUser();
-
-        listener.onComplete(user);
+        List<User> users = getUser();
+        listener.onComplete(users);
 
     }
 
-    private User getUser() {
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword("123456");
-        return user;
+    private List<User> getUser() {
+
+        List<User> users = BaseApplication.getDaoSession().getUserDao().loadAll();
+        return users;
     }
 }

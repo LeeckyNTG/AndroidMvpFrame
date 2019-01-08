@@ -6,6 +6,8 @@ import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
 import com.clover.androidmvpframe.mvp.login.model.ILoginModel;
 import com.clover.androidmvpframe.mvp.login.model.LoginModelImpl;
 
+import java.util.List;
+
 
 public class LoginPresenter extends LoginContract.Presenter {
 
@@ -35,9 +37,17 @@ public class LoginPresenter extends LoginContract.Presenter {
         mModel.login(new ILoginModel.LoginOnLoadListener() {
 
             @Override
-            public void onComplete(User user1) {
+            public void onComplete(List<User> users) {
                 mView.stopLoading();
-                if (user.getUsername().equals(user1.getUsername()) && user.getPassword().equals(user1.getPassword())) {
+
+                int position = 0;
+                for (User user1 : users) {
+                    if (user.getUsername().equals(user1.getUsername()) && user.getPassword().equals(user1.getPassword())) {
+                        break;
+                    }
+                    position++;
+                }
+                if (position < users.size()) {
                     mView.complete(true);
                 } else {
                     mView.complete(false);

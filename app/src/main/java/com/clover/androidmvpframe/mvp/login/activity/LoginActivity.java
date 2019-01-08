@@ -1,6 +1,8 @@
 package com.clover.androidmvpframe.mvp.login.activity;
 
+import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.clover.androidmvpframe.Base.BaseActivity;
+import com.clover.androidmvpframe.Base.BaseApplication;
 import com.clover.androidmvpframe.R;
 import com.clover.androidmvpframe.bean.User;
 import com.clover.androidmvpframe.mvp.login.contract.LoginContract;
@@ -15,6 +18,7 @@ import com.clover.androidmvpframe.mvp.login.presenter.LoginPresenter;
 import com.clover.androidmvpframe.widget.IconView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresenter> implements LoginContract.View {
@@ -33,12 +37,25 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresent
     @BindView(R.id.login_form)
     ScrollView loginForm;
 
-    @OnClick(R.id.login)
-    public void onViewClicked() {
-        User user = new User();
-        user.setUsername(username.getText().toString().trim());
-        user.setPassword(password.getText().toString().trim());
-        mPresenter.login(user);
+
+    @OnClick({R.id.login, R.id.icon})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.login: {
+                User user = new User();
+                user.setUsername(username.getText().toString().trim());
+                user.setPassword(password.getText().toString().trim());
+                mPresenter.login(user);
+            }
+            break;
+            case R.id.icon: {
+                User user = new User();
+                user.setUsername(username.getText().toString().trim());
+                user.setPassword(password.getText().toString().trim());
+                BaseApplication.getDaoSession().getUserDao().insert(user);
+            }
+            break;
+        }
     }
 
     @Override
@@ -90,5 +107,13 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginPresent
         if (!bol)
             Log.e("login", "showLoading: 密码不符合规范...");
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
 }
 
